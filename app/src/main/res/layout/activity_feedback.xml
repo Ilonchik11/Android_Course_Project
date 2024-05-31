@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".FeedbackActivity">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_btn_feedback"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:background="@color/main_title_fg"
+            android:padding="20dp" />
+
+        <LinearLayout
+            android:id="@+id/sub_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="User name"
+                android:autofillHints="Enter Your Name" />
+
+            <EditText
+                android:id="@+id/user_contact"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="Contact with you"
+                android:autofillHints="Enter the name of your recipe" />
+
+            <EditText
+                android:id="@+id/feedback_details"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="Feedback Details"
+                android:autofillHints="Enter the name of your recipe" />
+
+            <Button
+                android:id="@+id/send_feedback_button"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_margin="20dp"
+                android:text="Send" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/results_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20sp"
+            android:padding="20sp"
+            android:background="@color/white"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</ScrollView>

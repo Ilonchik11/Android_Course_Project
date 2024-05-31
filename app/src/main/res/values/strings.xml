@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Android_Course_Project</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="main_tv_title">World of Cooking</string>
+    <string name="main_btn_home">Home</string>
+    <string name="main_btn_privacy">Privacy</string>
+    <string name="main_btn_login">Login</string>
+    <string name="main_btn_logout">Log out</string>
+    <string name="main_btn_search">Search</string>
+    <string name="main_btn_new_recipe">New Recipe</string>
+    <string name="main_btn_feedback">Feedback</string>
+
+    <!-- LOGIN ACTIVITY -->
+    <string name="login_tv_title">Log In</string>
+    <string name="login_field_login">Login</string>
+    <string name="login_field_password">Password</string>
+    <string name="login_btn_enter">Enter</string>
+    <string name="login_btn_registration">Registration</string>
+</resources>

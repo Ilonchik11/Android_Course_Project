@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/main_title_fg"
+    android:layout_margin="20dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/recipe_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recipe Name"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/recipe_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recipe Info"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/recipe_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/recipe_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/recipe_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recipe Date"
+        android:layout_marginTop="2dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white" />
+</LinearLayout>

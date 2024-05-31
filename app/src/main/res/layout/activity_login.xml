@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:layout_margin="20dp"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/login_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/login_tv_title"
+        android:textAlignment="center"
+        android:textColor="@color/main_title_fg"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="@string/login_field_login"
+        android:autofillHints="Enter Your Login" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="@string/login_field_password"
+        android:inputType="textPassword"
+        android:autofillHints="Enter Your password" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="@string/login_btn_enter" />
+
+    <Button
+        android:id="@+id/login_btn_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_btn_registration"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

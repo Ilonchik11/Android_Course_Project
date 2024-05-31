@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    android:layout_margin="20dp"
+    tools:context=".RegistrationActivity">
+
+    <TextView
+        android:id="@+id/login_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="User Registration"
+        android:textAlignment="center"
+        android:textColor="@color/main_title_fg"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="@string/login_field_login"
+        android:autofillHints="Enter Your Login" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="Email"
+        android:autofillHints="Enter Your Email" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="@string/login_field_password"
+        android:inputType="textPassword"
+        android:autofillHints="Enter Your password" />
+
+    <EditText
+        android:id="@+id/password_repeat"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="Repeat password"
+        android:inputType="textPassword"
+        android:autofillHints="Repeat Your password" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Selected image"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/buttonSelectImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Select Image" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/registration_button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="Registration" />
+
+</LinearLayout>
+</ScrollView>

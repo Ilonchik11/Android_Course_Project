@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/main_title_fg"
+    android:layout_margin="20dp"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/feedback_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Name"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/feedback_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback Info"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/feedback_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback Date"
+        android:layout_margin="5dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/white" />
+</LinearLayout>
