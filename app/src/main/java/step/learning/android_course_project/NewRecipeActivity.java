@@ -62,6 +62,7 @@ import step.learning.android_course_project.models.Recipe;
 
 public class NewRecipeActivity extends AppCompatActivity {
     private static final String URL = "https://web-course-project20240219151321.azurewebsites.net/";
+    private static final String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/NewRecipe";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private LinearLayout resultsContainer;
 
@@ -98,19 +99,14 @@ public class NewRecipeActivity extends AppCompatActivity {
     }
 
     private void onSendRecipeButtonClick(View view) {
-        // Получаем значения из полей ввода
         String user = etUser.getText().toString();
         String recipeName = etRecipeName.getText().toString();
         String recipeDetails = etRecipeDetails.getText().toString();
 
-        // Получаем Bitmap из ImageView
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
-
-        // Сохраняем изображение в файл
         File imageFile = saveImageToFile(bitmap);
 
-        // Отправляем данные на сервер
         sendRecipeData(user, recipeName, recipeDetails, imageFile);
     }
 
@@ -119,7 +115,6 @@ public class NewRecipeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/NewRecipe";
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
@@ -128,17 +123,14 @@ public class NewRecipeActivity extends AppCompatActivity {
                         urlConnection.setConnectTimeout(5000);
                         urlConnection.setReadTimeout(5000);
 
-                        // Устанавливаем режим отправки данных формы
                         urlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=--------------------------");
 
-                        // Создаем тело запроса
                         String boundary = "--------------------------";
                         String separator = "--" + boundary + "\r\n";
                         String ending = "\r\n--" + boundary + "--\r\n";
                         OutputStream outputStream = urlConnection.getOutputStream();
                         PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"), true);
 
-                        // Добавляем поля формы
                         writer.append(separator);
                         writer.append("Content-Disposition: form-data; name=\"newrecipe-user\"\r\n\r\n");
                         writer.append(user + "\r\n");
@@ -151,7 +143,6 @@ public class NewRecipeActivity extends AppCompatActivity {
                         writer.append("Content-Disposition: form-data; name=\"newrecipe-info\"\r\n\r\n");
                         writer.append(recipeDetails + "\r\n");
 
-                        // Добавляем файл
                         writer.append(separator);
                         writer.append("Content-Disposition: form-data; name=\"newrecipe-photo\"; filename=\"" + imageFile.getName() + "\"\r\n");
                         writer.append("Content-Type: image/jpeg\r\n\r\n");
@@ -166,18 +157,16 @@ public class NewRecipeActivity extends AppCompatActivity {
                         outputStream.flush();
                         fileInputStream.close();
 
-                        // Завершаем запрос
                         writer.append(ending);
                         writer.flush();
                         writer.close();
 
-                        // Получаем ответ от сервера
                         int responseCode = urlConnection.getResponseCode();
                         if (responseCode == HttpURLConnection.HTTP_OK) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(NewRecipeActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(NewRecipeActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     Intent intent = new Intent(NewRecipeActivity.this, NewRecipeActivity.class);
                                     startActivity(intent);
@@ -188,7 +177,6 @@ public class NewRecipeActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(NewRecipeActivity.this, "Fail Connection!", Toast.LENGTH_SHORT).show();
-                                    // Обработка ошибки
                                 }
                             });
                         }
@@ -205,10 +193,7 @@ public class NewRecipeActivity extends AppCompatActivity {
 
     private File saveImageToFile(Bitmap bitmap) {
         try {
-            // Создаем временный файл
             File tempFile = File.createTempFile("tempImage", ".jpg", getCacheDir());
-
-            // Записываем изображение в файл
             FileOutputStream fos = new FileOutputStream(tempFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
@@ -243,15 +228,12 @@ public class NewRecipeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String urlString = URL + "/Home/NewRecipe";
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         urlConnection.setRequestMethod("POST");
-
                         urlConnection.setConnectTimeout(5000);
                         urlConnection.setReadTimeout(5000);
-
                         urlConnection.setDoOutput(true);
 
                         OutputStream outputStream = urlConnection.getOutputStream();
@@ -275,7 +257,7 @@ public class NewRecipeActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(NewRecipeActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(NewRecipeActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
                                     handleResponse(String.valueOf(response));
                                 }
                             });
@@ -298,14 +280,12 @@ public class NewRecipeActivity extends AppCompatActivity {
     }
     private void handleResponse(String htmlResponse) {
         List<Recipe> recipes = new ArrayList<>();
-        // Log.d("HTML Response", htmlResponse);
 
         Pattern recipePattern = Pattern.compile("<div class=\"card border-info\".*?>.*?(<div class=\"card-footer\"><i class=\"bi bi-calendar-check-fill\"></i> .*?</div>)\\s*</div>", Pattern.DOTALL);
         Matcher recipeMatcher = recipePattern.matcher(htmlResponse);
 
         while (recipeMatcher.find()) {
             String recipeBlock = recipeMatcher.group().trim();
-            // Log.d("Recipe HTML Block", recipeBlock);
 
             Pattern namePattern = Pattern.compile("<div class=\"card-header\"><b>(.*?)</b></div>", Pattern.DOTALL);
             Matcher nameMatcher = namePattern.matcher(recipeBlock);
@@ -313,7 +293,6 @@ public class NewRecipeActivity extends AppCompatActivity {
             if (nameMatcher.find()) {
                 name = nameMatcher.group(1).trim();
             }
-            // Log.d("Recipe Name", name);
 
             Pattern infoPattern = Pattern.compile("<p class=\"card-text\">(.*?)</p>", Pattern.DOTALL);
             Matcher infoMatcher = infoPattern.matcher(recipeBlock);
@@ -321,7 +300,6 @@ public class NewRecipeActivity extends AppCompatActivity {
             if (infoMatcher.find()) {
                 info = infoMatcher.group(1).replaceAll("&#xD;&#xA;", "\n").trim();
             }
-            // Log.d("Recipe Info", info);
 
             Pattern imagePattern = Pattern.compile("<img src=\"/images/(.*?)\" class=\"img-fluid\" alt=\"Recipe Image\">", Pattern.DOTALL);
             Matcher imageMatcher = imagePattern.matcher(recipeBlock);
@@ -329,7 +307,6 @@ public class NewRecipeActivity extends AppCompatActivity {
             if (imageMatcher.find()) {
                 imageUrl = imageMatcher.group(1).trim();
             }
-            // Log.d("Recipe Image URL", imageUrl);
 
             Pattern userPattern = Pattern.compile("<div class=\"card-footer\"><i class=\"bi bi-people-fill\"></i> (.*?)</div>", Pattern.DOTALL);
             Matcher userMatcher = userPattern.matcher(recipeBlock);
@@ -338,7 +315,6 @@ public class NewRecipeActivity extends AppCompatActivity {
                 String encodedUser = userMatcher.group(1).trim();
                 user = Html.fromHtml(encodedUser, Html.FROM_HTML_MODE_LEGACY).toString();
             }
-            // Log.d("Recipe User", user);
 
             Pattern datePattern = Pattern.compile("<div class=\"card-footer\"><i class=\"bi bi-calendar-check-fill\"></i> (.*?)</div>", Pattern.DOTALL);
             Matcher dateMatcher = datePattern.matcher(recipeBlock);
@@ -346,30 +322,24 @@ public class NewRecipeActivity extends AppCompatActivity {
             if (dateMatcher.find()) {
                 date = dateMatcher.group(1).trim();
             }
-            // Log.d("Recipe Date", date);
 
             recipes.add(new Recipe(name, info, imageUrl, user, date));
         }
 
         if (!recipes.isEmpty()) {
-            // displayToast("Рецепты найдены");
-            // for (Recipe recipe : recipes) {
-            //     Log.d("Recipe HTML", "Name: " + recipe.getNewRecipeName() + ", Info: " + recipe.getNewRecipeInfo());
-            // }
             displayRecipes(recipes);
         } else {
-            // displayToast("Рецепты не найдены");
             resultsContainer.removeAllViews();
-            findViewById(R.id.no_results_text).setVisibility(View.VISIBLE);  // Показать TextView если рецепты не найдены
+            findViewById(R.id.no_results_text).setVisibility(View.VISIBLE);
         }
     }
 
     private void displayRecipes(List<Recipe> recipes) {
-        // Очистка контейнера перед отображением новых результатов
         resultsContainer.removeAllViews();
 
         if (recipes.isEmpty()) {
             resultsContainer.removeAllViews();
+            resultsContainer.setVisibility(View.GONE);
         } else {
             resultsContainer.setVisibility(View.VISIBLE);
             for (Recipe recipe : recipes) {

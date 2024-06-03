@@ -57,43 +57,30 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            // Получение значений логина и пароля из полей ввода
                             String login = loginEditText.getText().toString();
                             String password = passwordEditText.getText().toString();
 
-                            // URL вашего сервера
                             String urlString = "https://web-course-project20240219151321.azurewebsites.net/api/auth";
                             URL url = new URL(urlString);
 
-                            // Формирование URL с параметрами логина и пароля
                             String urlStringWithParams = urlString + "?login=" + URLEncoder.encode(login, "UTF-8") +
                                     "&password=" + URLEncoder.encode(password, "UTF-8");
                             URL urlWithParams = new URL(urlStringWithParams);
 
-                            // Создание соединения
                             HttpURLConnection urlConnection = (HttpURLConnection) urlWithParams.openConnection();
                             try {
-                                // Установка метода запроса (GET в данном случае)
                                 urlConnection.setRequestMethod("GET");
-
-                                // Установка таймаута соединения
-                                urlConnection.setConnectTimeout(5000); // 5 секунд
-                                urlConnection.setReadTimeout(5000); // 5 секунд
-
-                                // Подключение к серверу и отправка запроса
+                                urlConnection.setConnectTimeout(5000);
+                                urlConnection.setReadTimeout(5000);
                                 urlConnection.connect();
 
-                                // Проверка успешности ответа (код 200 обозначает успешный запрос)
                                 int responseCode = urlConnection.getResponseCode();
                                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                                    // В случае успешного входа перенаправляем на главную страницу
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            // Получаем экземпляр SharedPreferences
                                             SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
 
-                                            // Редактируем SharedPreferences, указывая, что пользователь авторизован
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putBoolean("is_authenticated", true);
                                             editor.apply();
@@ -101,11 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(LoginActivity.this, "Вход выполнен успешно", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                             startActivity(intent);
-                                            finish(); // Закрываем LoginActivity
+                                            finish();
                                         }
                                     });
                                 } else {
-                                    // Вывод сообщения об ошибке
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -114,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                                     });
                                 }
                             } finally {
-                                // Закрытие соединения после завершения запроса
                                 urlConnection.disconnect();
                             }
                         } catch (IOException e) {

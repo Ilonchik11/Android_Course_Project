@@ -39,13 +39,12 @@ import step.learning.android_course_project.models.Recipe;
 
 public class FeedbackActivity extends AppCompatActivity {
 
-    private static final String URL = "https://web-course-project20240219151321.azurewebsites.net/";
+    private static final String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/Feedback";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private LinearLayout resultsContainer;
     private EditText etUserName;
     private EditText etNameContact;
     private EditText etFeedbackDetails;
-    private Button sendFeedbackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class FeedbackActivity extends AppCompatActivity {
         etUserName = findViewById(R.id.user_name);
         etNameContact = findViewById(R.id.user_contact);
         etFeedbackDetails = findViewById(R.id.feedback_details);
-        sendFeedbackButton = findViewById(R.id.send_feedback_button);
+        Button sendFeedbackButton = findViewById(R.id.send_feedback_button);
         sendFeedbackButton.setOnClickListener(this::onSendFeedbackButtonClick);
 
         resultsContainer = findViewById(R.id.results_container);
@@ -82,7 +81,6 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/Feedback";
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
@@ -90,28 +88,24 @@ public class FeedbackActivity extends AppCompatActivity {
                         urlConnection.setConnectTimeout(5000);
                         urlConnection.setReadTimeout(5000);
 
-                        // Устанавливаем тип контента application/x-www-form-urlencoded
                         urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-                        // Создаем тело запроса
                         String urlParameters = "feedback-user=" + URLEncoder.encode(user, "UTF-8") +
                                 "&feedback-contact=" + URLEncoder.encode(contact, "UTF-8") +
                                 "&feedback-text=" + URLEncoder.encode(feedbackText, "UTF-8");
 
-                        // Отправляем данные на сервер
                         urlConnection.setDoOutput(true);
                         OutputStream outputStream = urlConnection.getOutputStream();
                         outputStream.write(urlParameters.getBytes("UTF-8"));
                         outputStream.flush();
                         outputStream.close();
 
-                        // Получаем ответ от сервера
                         int responseCode = urlConnection.getResponseCode();
                         if (responseCode == HttpURLConnection.HTTP_OK) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(FeedbackActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(FeedbackActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     Intent intent = new Intent(FeedbackActivity.this, FeedbackActivity.class);
                                     startActivity(intent);
@@ -122,7 +116,6 @@ public class FeedbackActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(FeedbackActivity.this, "Fail Connection!", Toast.LENGTH_SHORT).show();
-                                    // Обработка ошибки
                                 }
                             });
                         }
@@ -142,15 +135,12 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String urlString = URL + "/Home/Feedback";
                     java.net.URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         urlConnection.setRequestMethod("POST");
-
                         urlConnection.setConnectTimeout(5000);
                         urlConnection.setReadTimeout(5000);
-
                         urlConnection.setDoOutput(true);
 
                         OutputStream outputStream = urlConnection.getOutputStream();
@@ -174,7 +164,7 @@ public class FeedbackActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(FeedbackActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(FeedbackActivity.this, "Connection OK!", Toast.LENGTH_SHORT).show();
                                     handleResponse(String.valueOf(response));
                                 }
                             });
@@ -198,7 +188,6 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private void handleResponse(String htmlResponse) {
         List<Feedback> feedbacks = new ArrayList<>();
-        // Log.d("HTML Response", htmlResponse);
 
         Pattern feedbackPattern = Pattern.compile(
                 "<div class=\"card border-info\".*?>.*?(<div class=\"card-footer\">.*?</div>)\\s*</div>",
@@ -208,7 +197,6 @@ public class FeedbackActivity extends AppCompatActivity {
 
         while (recipeMatcher.find()) {
             String feedbackBlock = recipeMatcher.group().trim();
-            // Log.d("Feedback HTML Block", feedbackBlock);
 
             Pattern namePattern = Pattern.compile("<div class=\"card-header\"><b>(.*?)</b></div>", Pattern.DOTALL);
             Matcher nameMatcher = namePattern.matcher(feedbackBlock);
@@ -217,7 +205,6 @@ public class FeedbackActivity extends AppCompatActivity {
                 String encodedUser = nameMatcher.group(1).trim();
                 userName = Html.fromHtml(encodedUser, Html.FROM_HTML_MODE_LEGACY).toString();
             }
-            // Log.d("Feedback Name", userName);
 
             Pattern infoPattern = Pattern.compile("<p class=\"card-text\">(.*?)</p>", Pattern.DOTALL);
             Matcher infoMatcher = infoPattern.matcher(feedbackBlock);
@@ -225,15 +212,13 @@ public class FeedbackActivity extends AppCompatActivity {
             if (infoMatcher.find()) {
                 feedbackInfo = infoMatcher.group(1).replaceAll("&#xD;&#xA;", "\n").trim();
             }
-            // Log.d("Feedback Info", feedbackInfo);
 
             Pattern datePattern = Pattern.compile("<div class=\"card-footer\">(.*?)</div>", Pattern.DOTALL);
             Matcher dateMatcher = datePattern.matcher(feedbackBlock);
-            String feedbackDate = "Unknown"; // Default value
+            String feedbackDate = "Unknown";
             if (dateMatcher.find()) {
                 feedbackDate = dateMatcher.group(1).trim();
             }
-            // Log.d("Feedback Date", feedbackDate);
 
             feedbacks.add(new Feedback(userName, feedbackInfo, feedbackDate));
         }
@@ -247,11 +232,11 @@ public class FeedbackActivity extends AppCompatActivity {
     }
 
     private void displayFeedbacks(List<Feedback> feedbacks) {
-        // Очистка контейнера перед отображением новых результатов
         resultsContainer.removeAllViews();
 
         if (feedbacks.isEmpty()) {
             resultsContainer.removeAllViews();
+            resultsContainer.setVisibility(View.GONE);
         } else {
             resultsContainer.setVisibility(View.VISIBLE);
             for (Feedback feedback : feedbacks) {

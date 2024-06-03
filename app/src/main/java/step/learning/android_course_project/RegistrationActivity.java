@@ -37,7 +37,7 @@ import java.util.concurrent.Executors;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private static final String URL = "https://web-course-project20240219151321.azurewebsites.net/";
+    private static final String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/UserRegistration";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private static final int PICK_IMAGE_REQUEST = 1;
     private ImageView imageView;
@@ -88,7 +88,6 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String urlString = "https://web-course-project20240219151321.azurewebsites.net/Home/UserRegistration";
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
@@ -96,18 +95,15 @@ public class RegistrationActivity extends AppCompatActivity {
                         urlConnection.setConnectTimeout(5000);
                         urlConnection.setReadTimeout(5000);
 
-                        // Устанавливаем режим отправки данных формы
                         String boundary = "--------------------------" + System.currentTimeMillis();
                         urlConnection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 
-                        // Создаем тело запроса
                         OutputStream outputStream = urlConnection.getOutputStream();
                         PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"), true);
 
                         String separator = "--" + boundary + "\r\n";
                         String ending = "\r\n--" + boundary + "--\r\n";
 
-                        // Добавляем поля формы
                         writer.append(separator);
                         writer.append("Content-Disposition: form-data; name=\"signup-login\"\r\n\r\n");
                         writer.append(login + "\r\n");
@@ -124,7 +120,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         writer.append("Content-Disposition: form-data; name=\"signup-repeat\"\r\n\r\n");
                         writer.append(repeatPassword + "\r\n");
 
-                        // Добавляем файл
                         writer.append(separator);
                         writer.append("Content-Disposition: form-data; name=\"signup-avatar\"; filename=\"" + avatarFile.getName() + "\"\r\n");
                         writer.append("Content-Type: image/jpeg\r\n\r\n");
@@ -139,18 +134,16 @@ public class RegistrationActivity extends AppCompatActivity {
                         outputStream.flush();
                         fileInputStream.close();
 
-                        // Завершаем запрос
                         writer.append(ending);
                         writer.flush();
                         writer.close();
 
-                        // Получаем ответ от сервера
                         int responseCode = urlConnection.getResponseCode();
                         if (responseCode == HttpURLConnection.HTTP_OK) {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(RegistrationActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                                     startActivity(intent);
@@ -161,7 +154,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(RegistrationActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
-                                    // Обработка ошибки
                                 }
                             });
                         }
@@ -178,10 +170,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private File saveImageToFile(Bitmap bitmap) {
         try {
-            // Создаем временный файл
             File tempFile = File.createTempFile("tempImage", ".jpg", getCacheDir());
-
-            // Записываем изображение в файл
             FileOutputStream fos = new FileOutputStream(tempFile);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();

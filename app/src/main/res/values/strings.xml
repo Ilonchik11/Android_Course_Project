@@ -17,4 +17,49 @@
     <string name="login_field_password">Password</string>
     <string name="login_btn_enter">Enter</string>
     <string name="login_btn_registration">Registration</string>
+
+    <!-- FEEDBACK ACTIVITY -->
+    <string name="feedback_tv_title">Leave your feedback…</string>
+    <string name="feedback_field_user">User name</string>
+    <string name="feedback_field_contact">Contact with you</string>
+    <string name="feedback_field_details">Feedback Details</string>
+    <string name="feedback_btn_send">Send</string>
+
+    <!-- FEEDBACK ITEM -->
+    <string name="feedback_item_tv_user_name">User Name</string>
+    <string name="feedback_item_tv_feedback_info">Feedback Info</string>
+    <string name="feedback_item_tv_feedback_date">Feedback Date</string>
+
+    <!-- NEW RECIPE ACTIVITY -->
+    <string name="new_recipe_tv_title">Add Your New Recipe…</string>
+    <string name="new_recipe_field_user">User</string>
+    <string name="new_recipe_field_recipe_name">Recipe Name</string>
+    <string name="new_recipe_field_recipe_details">Recipe Details</string>
+    <string name="new_recipe_selected_image">Selected Image</string>
+    <string name="new_recipe_btn_select_image">Select Image</string>
+    <string name="new_recipe_btn_send">Send</string>
+
+    <!-- RECIPE ITEM -->
+    <string name="recipe_item_tv_recipe_name">Recipe Name</string>
+    <string name="recipe_item_tv_recipe_info">Recipe Info</string>
+    <string name="recipe_item_recipe_image">Recipe Image</string>
+    <string name="recipe_item_tv_user_name">User Name</string>
+    <string name="recipe_item_tv_recipe_date">Recipe Date</string>
+
+    <!-- REGISTRATION ACTIVITY -->
+    <string name="registration_tv_title">User Registration</string>
+    <string name="registration_field_login">Login</string>
+    <string name="registration_field_email">Email</string>
+    <string name="registration_field_password">Password</string>
+    <string name="registration_field_password_repeat">Repeat Password</string>
+    <string name="registration_selected_image">Selected Image</string>
+    <string name="registration_btn_select_image">Select Image</string>
+    <string name="registration_btn_registration">Registration</string>
+
+    <!-- SEARCH ACTIVITY -->
+    <string name="search_tv_title">Search the Recipes</string>
+    <string name="search_field_search_query">Enter search query…</string>
+    <string name="search_btn_search">Search</string>
+    <string name="search_no_results">No Results</string>
+
 </resources>

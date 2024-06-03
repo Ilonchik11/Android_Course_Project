@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
         tools:context=".FeedbackActivity">
@@ -17,7 +17,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/main_btn_feedback"
+            android:text="@string/feedback_tv_title"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:textStyle="bold"
@@ -37,21 +37,24 @@
                 android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="User name"
+                android:hint="@string/feedback_field_user"
+                android:inputType="text"
                 android:autofillHints="Enter Your Name" />
 
             <EditText
                 android:id="@+id/user_contact"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="Contact with you"
+                android:hint="@string/feedback_field_contact"
+                android:inputType="text"
                 android:autofillHints="Enter the name of your recipe" />
 
             <EditText
                 android:id="@+id/feedback_details"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:hint="Feedback Details"
+                android:hint="@string/feedback_field_details"
+                android:inputType="text"
                 android:autofillHints="Enter the name of your recipe" />
 
             <Button
@@ -61,7 +64,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_margin="20dp"
-                android:text="Send" />
+                android:text="@string/feedback_btn_send" />
         </LinearLayout>
 
         <LinearLayout

@@ -11,7 +11,7 @@
         android:id="@+id/recipe_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recipe Name"
+        android:text="@string/recipe_item_tv_recipe_name"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@android:color/white" />
@@ -20,7 +20,7 @@
         android:id="@+id/recipe_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recipe Info"
+        android:text="@string/recipe_item_tv_recipe_info"
         android:layout_marginTop="4dp"
         android:textSize="14sp"
         android:textColor="@android:color/white" />
@@ -30,13 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="4dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/recipe_item_recipe_image" />
 
     <TextView
         android:id="@+id/recipe_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name"
+        android:text="@string/recipe_item_tv_user_name"
         android:layout_marginTop="4dp"
         android:textSize="14sp"
         android:textColor="@android:color/white" />
@@ -45,7 +46,7 @@
         android:id="@+id/recipe_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recipe Date"
+        android:text="@string/recipe_item_tv_recipe_date"
         android:layout_marginTop="2dp"
         android:textSize="14sp"
         android:textColor="@android:color/white" />

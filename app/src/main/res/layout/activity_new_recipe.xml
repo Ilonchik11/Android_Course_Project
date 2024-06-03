@@ -8,7 +8,7 @@ android:background="@color/main_bg">
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".SearchActivity">
@@ -37,21 +37,24 @@ android:background="@color/main_bg">
             android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="User"
+            android:hint="@string/new_recipe_field_user"
+            android:inputType="text"
             android:autofillHints="Enter Your Name" />
 
         <EditText
             android:id="@+id/recipe_name"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="Recipe name"
+            android:hint="@string/new_recipe_field_recipe_name"
+            android:inputType="text"
             android:autofillHints="Enter the name of your recipe" />
 
         <EditText
             android:id="@+id/recipe_details"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:hint="Recipe Details"
+            android:hint="@string/new_recipe_field_recipe_details"
+            android:inputType="text"
             android:autofillHints="Enter the name of your recipe" />
 
         <LinearLayout
@@ -66,14 +69,14 @@ android:background="@color/main_bg">
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:background="@android:color/darker_gray"
-                android:contentDescription="Selected image"
+                android:contentDescription="@string/new_recipe_selected_image"
                 android:layout_marginBottom="16dp" />
 
             <Button
                 android:id="@+id/buttonSelectImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Image" />
+                android:text="@string/new_recipe_btn_select_image" />
 
         </LinearLayout>
 
@@ -84,7 +87,7 @@ android:background="@color/main_bg">
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="20dp"
-            android:text="Send" />
+            android:text="@string/new_recipe_btn_send" />
     </LinearLayout>
 
     <LinearLayout

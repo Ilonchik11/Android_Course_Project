@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_bg">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="30dp"
     android:layout_margin="20dp"
     tools:context=".RegistrationActivity">
@@ -18,7 +18,7 @@
         android:id="@+id/login_tv_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="User Registration"
+        android:text="@string/registration_tv_title"
         android:textAlignment="center"
         android:textColor="@color/main_title_fg"
         android:textSize="36sp"
@@ -28,21 +28,23 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="@string/login_field_login"
+        android:hint="@string/registration_field_login"
+        android:inputType="text"
         android:autofillHints="Enter Your Login" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="Email"
+        android:hint="@string/registration_field_email"
+        android:inputType="textEmailAddress"
         android:autofillHints="Enter Your Email" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="@string/login_field_password"
+        android:hint="@string/registration_field_password"
         android:inputType="textPassword"
         android:autofillHints="Enter Your password" />
 
@@ -50,9 +52,9 @@
         android:id="@+id/password_repeat"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:hint="Repeat password"
+        android:hint="@string/registration_field_password_repeat"
         android:inputType="textPassword"
-        android:autofillHints="Repeat Your password" />
+        android:autofillHints="Repeat Your Password" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,7 +68,7 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:background="@android:color/darker_gray"
-            android:contentDescription="Selected image"
+            android:contentDescription="@string/registration_selected_image"
             android:layout_marginBottom="16dp" />
 
         <Button
@@ -74,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Select Image" />
+            android:text="@string/registration_btn_select_image" />
 
     </LinearLayout>
 
@@ -84,7 +86,7 @@
         android:layout_height="65dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text="Registration" />
+        android:text="@string/registration_btn_registration" />
 
 </LinearLayout>
 </ScrollView>
